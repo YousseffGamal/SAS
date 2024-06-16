@@ -1,17 +1,90 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
 body{
     min-height: 100vh;
  
     background-image: url('../../../public/Images/sign\ in\ bg.png');
     background-size: cover;
     background-position: center;
+}
+@font-face {
+    font-family: Baloo-Medium;
+    src: url(../../assets/Fonts/Baloo/BalooBhaina2-Medium.ttf);
+  }
+  @font-face {
+    font-family: Baloo-Regular;
+    src: url(../../assets/Fonts/Baloo/BalooBhaina2-Regular.ttf);
+  }
+  @font-face {
+    font-family: Gilroy-Bold;
+    src: url(../../assets/Fonts/Gilroy/Gilroy-Bold.ttf);
+  }
+  .login-Title{
+    font-family: Baloo-Medium;
+    font-size:55.46px ;
+    margin-bottom: 100px !important;
+    color: #FFFFFF;
+  }
+  .login-supTitle{
+    font-family: Baloo-Regular;
+    font-size:32.29px ;
+    color: #FFFFFF;
+  }
+  /* Login.css */
+.form-label-left {
+    text-align: left;
+    display: block; /* Ensure the label behaves as a block element */
+    color: #FFFFFF;
+    font-family: Baloo-Medium;
+    font-size:21.06px ;
+
+}
+.int{
+  background-color: transparent !important;
+  border: 1px solid #FF8217 !important;
+  border-top: none !important;
+  border-left:  none !important;
+  border-right:  none !important;
+
+}
+
+.int::placeholder {
+
+  color: #9B9B9B !important; /* Adjust this color to your preference */
+  font-family: Baloo-Regular !important;
+  font-size:18.25px  !important;
+
+
+}
+.forget{
+  color: #9B9B9B !important; /* Adjust this color to your preference */
+  font-family: Baloo-Regular !important;
+  font-size:21.06px  !important;
+  margin-top: 29px;
+}
+.Sigin{
+  margin-top: 60px;
+  background-color: #F1F4F3 !important;
+  border-color: #F1F4F3 !important;
+  border-radius: 25.15px !important;
+  width: 168.74px !important;
+  height: 50.29px !important;
+  color: #154A4A !important;
+  font-family: Gilroy-Bold !important;
+  font-size: 23.16px !important;
+}
+.Sigin:hover {
+  background-color: #154A4A !important; /* Change background color on hover */
+  color: #F1F4F3 !important; /* Change text color on hover */
+  transition: 0.5s;
+}
+/* .login-supTitle {
+  font-family: Baloo-Regular;
+  font-size: 25.29px;
+  color: #FFFFFF;
+} */
+@media only screen and (max-width: 768px) {
+ 
+.login-supTitle {
+  font-size: 25.29px;
+}
 }
