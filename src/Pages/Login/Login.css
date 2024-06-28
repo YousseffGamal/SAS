@@ -4,6 +4,18 @@
   background-image: url("../../../public/Images/sign\ in\ bg.png");
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+width: 100% !important;
 }
 
 @font-face {
@@ -26,12 +38,14 @@
   font-size: 55.46px;
   margin-bottom: 100px !important;
   color: #ffffff;
+  text-align: center;
 }
 
 .login-supTitle {
   font-family: Baloo-Regular;
   font-size: 32.29px;
   color: #ffffff;
+  text-align: center;
 }
 
 .form-label-left {
@@ -47,6 +61,7 @@
   border: 1px solid #ff8217 !important;
   border-top: none !important;
   border-left: none !important;
+  width: 456.21px !important;
   border-right: none !important;
 }
 
@@ -61,6 +76,7 @@
   font-family: Baloo-Regular !important;
   font-size: 21.06px !important;
   margin-top: 29px;
+  text-align: center;
 }
 
 .Sigin {
@@ -84,5 +100,27 @@
 @media only screen and (max-width: 768px) {
   .login-supTitle {
     font-size: 25.29px;
+  }
+  .int{
+    width: 100% !important;
+  }
+}
+
+
+.home-container {
+  display: flex;
+}
+
+.content {
+  margin-left: 302px; /* Adjust based on the width of your sidebar + margin */
+  padding: 20px;
+  width: calc(100% - 302px); /* Adjust based on the width of your sidebar + margin */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    width: 100%;
   }
 }

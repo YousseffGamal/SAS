@@ -1,0 +1,84 @@
+/* AddEmployee.css */
+
+.home-container {
+    display: flex;
+  }
+  
+  .content {
+    margin-left: 302px; /* Adjust based on the width of your sidebar + margin */
+    padding: 20px;
+    width: calc(100% - 302px); /* Adjust based on the width of your sidebar + margin */
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .head {
+    font-family: Baloo-SemiBold;
+    font-size: 35.97px;
+    margin-bottom: 60px;
+    margin-top: 60px;
+    text-align: center;
+  }
+  
+  .form-container {
+    width: 732.87px;
+    margin: 0 auto; /* Center the form horizontally */
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  .input-field {
+    background-color: #f1f4f3;
+    width: calc(100% - 30px); /* Adjust to accommodate icon */
+    height: 62px;
+    padding: 10px 15px 10px 45px; /* Adjust padding to make space for icon */
+    border: 1px solid #d0dbdb;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+  }
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #ccc; /* Adjust icon color */
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #5bc0de; /* Example focus border color */
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .input-field{
+        width: 100% !important;
+    }
+    .form-container{
+        width: 100%;
+    }
+    .content {
+        margin-left: 0;
+        width: 100%;
+      }
+  }
+  .btn-info{
+    margin-top: 50px;
+    width: 174.77px;
+    height: 49.2px;
+    border-radius: 34px;
+    font-size: 25px;
+    background-color: transparent;
+    border-color: #154A4A;
+    color: #154A4A;
+    font-family: Gilroy-Bold;
+  }
+  @font-face {
+    font-family: Gilroy-Bold;
+    src: url(../../assets/Fonts/Gilroy/Gilroy-Bold.ttf);
+  }
+  

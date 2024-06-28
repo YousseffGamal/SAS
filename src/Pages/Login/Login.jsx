@@ -3,6 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import "animate.css/animate.min.css";
 import "./Login.css"; // for custom styling
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   useEffect(() => {
@@ -16,7 +17,7 @@ const Login = () => {
   }, []);
 
   return (
-    <Container className="login-container" style={{ marginBottom: "40px" }}>
+    <Container className="login-container">
       <Form className="login-form wow animate__animated animate__fadeInUp">
         <h2 className="login-Title wow animate__animated animate__fadeInDown">
           Sign In
@@ -64,14 +65,22 @@ const Login = () => {
           Forget your password!
         </p>
 
+      <div style={{display:"flex",justifyContent:"center"}}>
+        <Link to="/SetLocation">
         <Button
           variant="primary"
           className="Sigin wow animate__animated animate__fadeInUp"
           type="submit"
           data-wow-delay="1s"
+          
         >
+        
           Sign in
+
         </Button>
+        </Link>
+ 
+      </div>
       </Form>
     </Container>
   );

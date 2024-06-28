@@ -1,0 +1,101 @@
+/* Update your CSS file EmployeesRecords.css */
+.home-container {
+    display: flex;
+  }
+  body{
+    background-image: url("../../../public/Images/Group\ 2\ \(1\).png");
+    background-position: center ;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-color: #f1f4f3;
+    
+      }
+  @font-face {
+    font-family: Baloo-Medium;
+    src: url(../../assets/Fonts/Baloo/BalooBhaina2-Medium.ttf);
+  }
+  
+  @font-face {
+    font-family: Baloo-SemiBold;
+    src: url(../../assets/Fonts/Baloo/BalooBhaina2-SemiBold.ttf);
+  }
+  
+  @font-face {
+    font-family: Baloo-Regular;
+    src: url(../../assets/Fonts/Baloo/BalooBhaina2-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: Gilroy-Bold;
+    src: url(../../assets/Fonts/Gilroy/Gilroy-Bold.ttf);
+  }
+  
+  @font-face {
+    font-family: Source-Regular;
+    src: url(../../assets/Fonts/source-sans-pro/SourceSansPro-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: Source-SemiBold;
+    src: url(../../assets/Fonts/source-sans-pro/SourceSansPro-Semibold.ttf);
+  }
+  
+  .content {
+    margin-left: 302px; /* Adjust based on the width of your sidebar + margin */
+    padding: 20px;
+    width: calc(100% - 302px); /* Adjust based on the width of your sidebar + margin */
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  @media (max-width: 768px) {
+    .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  
+  .head {
+    font-family: Baloo-SemiBold;
+    font-size: 35.97px;
+    margin-bottom: 60px;
+    margin-top: 60px;
+    text-align: center;
+  }
+  
+  .table-responsive {
+    display: flex;
+    justify-content: center;
+  }
+ 
+  
+  table {
+    width: 839px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #d0dbdb;
+    border-radius: 15px; /* Add border-radius directly to table */
+  }
+  
+  .table tr {
+    height: 64px !important;
+    border: none !important;
+  }
+  
+  th,
+  td {
+    border: none !important;
+  }
+  
+  .table td {
+    padding: 10px !important;
+    background-color: #FFFFFF !important;
+    font-size: 14px !important;
+    font-family: Source-Regular !important;
+    border: none !important;
+  }
+  
+  .gre {
+    font-family: Source-SemiBold !important;
+    color: #154a4a !important;
+    font-family: 700 !important;
+  }
+  
