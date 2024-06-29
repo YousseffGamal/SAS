@@ -33,21 +33,27 @@ const Sidebar = () => {
           <img src={logo} alt="Logo" />
         </div>
         <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: "60px" }}>
-          <li style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px" }}>
-            <Link className='tex' to="/EmployeesRecords">
+        <Link className='tex' to="/EmployeesRecords" style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px",textDecoration:"none",color:"white" }}>
+          <li >
+          
               <FaHome style={{ marginRight: "10px" }} /> Records
-            </Link>
+           
           </li>
-          <li style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px" }}>
-            <Link className='tex' to="/AddEmployee">
+          </Link>
+          <Link className='tex' to="/AddEmployee" style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px",textDecoration:"none",color:"white"  }}>
+          <li >
+     
               <FaUserPlus style={{ marginRight: "10px" }} /> Add Employee
-            </Link>
+          
           </li>
-          <li style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px" }}>
-            <Link className='tex' to="/SetLocation">
+          </Link>
+          <Link className='tex' to="/SetLocation"style={{ backgroundColor: "#275959", width: "188px", height: "51px", borderRadius: "12px", marginTop: "30px",textDecoration:"none",color:"white"  }}>
+          <li >
+           
               <FaMapMarkerAlt style={{ marginRight: "10px" }} /> Set Location
-            </Link>
+       
           </li>
+          </Link>
         </ul>
       </nav>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../../Components/SIdebar/Sidebar';
-import './Frank’s Daily Records.css';
+import './Daily Records.css';
 const FrankDailyRecords = () => {
   return (
     <div className="home-container">

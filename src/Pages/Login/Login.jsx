@@ -97,13 +97,14 @@ const Login = () => {
             data-wow-delay="0.4s"
             onChange={handleChange}
             required
+            style={{color:"white"}}
           />
           <Form.Control.Feedback type="invalid">
             please enter your email
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword" style={{ marginTop: "60px" }}>
+        <Form.Group controlId="formBasicPassword" style={{ marginTop: "60px",color:"white" }}>
           <Form.Label
             className="form-label-left wow animate__animated animate__fadeInLeft"
             data-wow-delay="0.6s"
@@ -118,6 +119,7 @@ const Login = () => {
             data-wow-delay="0.6s"
             name="password"
             onChange={handleChange}
+            style={{color:"white"}}
           />
           <Form.Control.Feedback type="invalid">
             please enter your password

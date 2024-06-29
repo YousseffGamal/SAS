@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../Components/SIdebar/Sidebar';
 import './EmployeesRecords.css';
+import { Link } from 'react-router-dom';
 import arrow from '../../Images/shortcut.png'
 import api from "../../axios";
 const EmployeesRecords = () => {
