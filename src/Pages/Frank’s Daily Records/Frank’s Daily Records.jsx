@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../../Components/SIdebar/Sidebar';
 import './Frank’s Daily Records.css';
-import arrow from '../../../public/Images/shortcut.png'
 const FrankDailyRecords = () => {
   return (
     <div className="home-container">

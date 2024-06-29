@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaBars, FaHome, FaUserPlus, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-import logo from "../../../public/Images/SAS.png";
+import logo from "../../Images/SAS.png";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);

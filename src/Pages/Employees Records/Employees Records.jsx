@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../../Components/SIdebar/Sidebar';
 import './EmployeesRecords.css';
-import arrow from '../../../public/Images/shortcut.png'
+import arrow from '../../Images/shortcut.png'
 const EmployeesRecords = () => {
   return (
     <div className="home-container">

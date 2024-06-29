@@ -1,7 +1,7 @@
 /* Scope styles to login-body */
 .login-body {
   min-height: 100vh;
-  background-image: url("../../../public/Images/sign\ in\ bg.png");
+  background-image: url("../../Images/sign\ in\ bg.png");
   background-size: cover;
   background-position: center;
   display: flex;
