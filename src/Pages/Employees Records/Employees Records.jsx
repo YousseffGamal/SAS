@@ -31,7 +31,7 @@ const [records , setRecords]=useState([])
                 <th>Name</th>
                 <th>Hours</th>
                 <th style={{textAlign:"center"}}>From:To</th>
-                <th></th>
+                <th style={{textAlign:"right"}}>Details</th>
               </tr>
             </thead>
             <tbody>
