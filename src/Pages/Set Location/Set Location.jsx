@@ -1,79 +1,151 @@
-import React, { useState } from 'react';
-import Sidebar from '../../Components/SIdebar/Sidebar'; // Adjust path as necessary
-import './Set Location.css'; // Ensure correct CSS file path
-import { FaMapMarkerAlt } from 'react-icons/fa'; // Import required icons from react-icons/fa
+import React, { useState, useEffect } from "react";
+import Sidebar from "../../Components/SIdebar/Sidebar"; // Adjust path as necessary
+import "./Set Location.css"; // Ensure correct CSS file path
+import { FaMapMarkerAlt } from "react-icons/fa"; // Import required icons from react-icons/fa
+import api from "../../axios";
 
 const SetLocation = () => {
-  const [location, setLocation] = useState('');
-  const [mapSrc, setMapSrc] = useState('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509385!2d144.96305791590428!3d-37.81362797975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d7fc1358c1e5!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619096692450!5m2!1sen!2sau');
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [map, setMap] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [name, setName] = useState("");
+  const [marker, setMarker] = useState(null); // State to hold the marker object
+  const [markerLocation, setMarkerLocation] = useState(null);
+  const [radius, setRadius] = useState();
+  const [isSetButtonEnabled, setIsSetButtonEnabled] = useState(false);
 
-  const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+  useEffect(() => {
+    function initMap() {
+      const mapContainer = document.getElementById("map-container");
+      const mapOptions = {
+        zoom: 13,
+        center: { lat: 24.596080, lng: 46.705032 }, // Adjust center coordinates if needed
+      };
+      const newMap = new window.google.maps.Map(mapContainer, mapOptions); // Ensure window.google is used
+      setMap(newMap);
+
+      // Add a marker placement listener
+      newMap.addListener("click", function (event) {
+        placeMarker(event.latLng); // Call placeMarker with clicked location
+      });
+    }
+
+    if (window.google && window.google.maps) {
+      initMap();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (name  && radius) {
+      setIsSetButtonEnabled(true);
+    } else {
+      setIsSetButtonEnabled(false);
+    }
+  }, [name, radius]);
+
+  const placeMarker = (location) => {
+    // If a marker already exists, remove it
+    if (marker) {
+      marker.setMap(null);
+    }
+
+    // Create a new marker
+    const newMarker = new window.google.maps.Marker({
+      position: location,
+      map: map,
+    });
+
+    // Update marker state and location state
+    setMarker(newMarker);
+    setMarkerLocation(location);
   };
 
   const handleSearch = () => {
-    const newMapSrc = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(location)}`;
-    setMapSrc(newMapSrc);
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ address: searchInput }, (results, status) => {
+      if (status === window.google.maps.GeocoderStatus.OK && results[0]) {
+        const location = results[0].geometry.location;
+        map.setCenter(location);
+        placeMarker(location); // Place a marker on the searched location
+      } else {
+        window.alert(
+          "Geocode was not successful for the following reason: ",
+          status
+        );
+      }
+    });
   };
 
-  const handleSetLocation = async () => {
+  const setLocation = async () => {
     try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=YOUR_API_KEY`);
-      const data = await response.json();
-      if (data.results && data.results.length > 0) {
-        const { lat, lng } = data.results[0].geometry.location;
-        setLatitude(lat);
-        setLongitude(lng);
-        console.log('Latitude:', lat, 'Longitude:', lng);
-      } else {
-        console.error('No results found');
+      if (markerLocation) {
+        await api.post('/locations/add_location',
+          {
+            location_name: name,
+            latitude: markerLocation.lat(),
+            longitude: markerLocation.lng(),
+            radius: radius
+          }
+        )
+        window.alert('Location added successfully')
       }
     } catch (error) {
-      console.error('Error fetching geocode data:', error);
+      window.alert('Error adding location')
     }
-  };
-
+  }
   return (
     <div className="home-container">
       <Sidebar />
       <div className="content">
-        <h1 className='head' style={{ marginBottom: "100px" }}>Set Location</h1>
+        <h1 className="head" style={{ marginBottom: "100px" }}>
+          Set Location
+        </h1>
         <div className="form-container">
           <div className="input-container">
-            <div className="input-group">
-              <input type="text" className="input-field" placeholder="Range" />
-              <FaMapMarkerAlt style={{ color: '#154a4a' }} className="input-icon" />
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Location name (ex work1)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="number"
+              className="input-field"
+              placeholder="Radius in meter"
+              value={radius}
+              onChange={(e) => setRadius(e.target.value)}
+            />
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Search Location"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
             </div>
-            <div className="input-group">
-              <input
-                type="text"
-                className="input-field"
-                placeholder="Search location"
-                value={location}
-                onChange={handleLocationChange}
-              />
-              <FaMapMarkerAlt style={{ color: '#154a4a' }} className="input-icon" />
-            </div>
-            <button type="button" className="btn btn-info" onClick={handleSearch}>Search</button>
           </div>
         </div>
+        <div
+          id="map-container"
+          style={{
+            margin: "auto",
+            width: "700.76px",
+            height: "460.15px",
+            marginTop: "20px",
+          }}
+        ></div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <iframe
-            src={mapSrc}
-            width="600"
-            height="450"
-            style={{ border: 0, width: "707.76px", height: "460.15px", marginTop: "20px" }}
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <button type="button" className="btn btn-info" onClick={handleSetLocation}>Set</button>
-        </div>
-        <div className="map-container">
-          {/* Add your map component or embed code here */}
+          <button type="button" onClick={setLocation} className="btn btn-info" disabled={!isSetButtonEnabled}>
+            Set
+          </button>
         </div>
       </div>
     </div>
