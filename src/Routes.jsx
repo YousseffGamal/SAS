@@ -5,6 +5,7 @@ import EmployeeDailyRecords from "./Pages/Daily Records/Daily Records";
 import EmployeesRecords from "./Pages/Employees Records/Employees Records";
 import Login from "./Pages/Login/Login";
 import SetLocation from "./Pages/Set Location/Set Location"
+import UsersRecords from "./Pages/Users/Users";
 // 
 const ProjectRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const ProjectRoutes = () => {
           <Route path="/employee-details/:employee_id" element={<EmployeeDailyRecords />} />
           <Route path="/EmployeesRecords" element={<EmployeesRecords />} />
           <Route path="/SetLocation" element={<SetLocation />} />
+          <Route path="/users" element={<UsersRecords />} />
 
 
 
