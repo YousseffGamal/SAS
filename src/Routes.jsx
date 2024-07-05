@@ -5,7 +5,7 @@ import EmployeeDailyRecords from "./Pages/Daily Records/Daily Records";
 import EmployeesRecords from "./Pages/Employees Records/Employees Records";
 import Login from "./Pages/Login/Login";
 import SetLocation from "./Pages/Set Location/Set Location"
-import UsersRecords from "./Pages/EmployeesAndAdmins/Employees Records";
+import UsersRecords from "./Pages/Users/Users";
 // 
 const ProjectRoutes = () => {
   return (
