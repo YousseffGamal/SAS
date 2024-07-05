@@ -22,11 +22,6 @@ const SetLocation = () => {
       };
       const newMap = new window.google.maps.Map(mapContainer, mapOptions); // Ensure window.google is used
       setMap(newMap);
-
-      // Add a marker placement listener
-      newMap.addListener("click", function (event) {
-        placeMarker(event.latLng); // Call placeMarker with clicked location
-      });
     }
 
     if (window.google && window.google.maps) {
@@ -35,7 +30,7 @@ const SetLocation = () => {
   }, []);
 
   useEffect(() => {
-    if (name  && radius) {
+    if (name && radius) {
       setIsSetButtonEnabled(true);
     } else {
       setIsSetButtonEnabled(false);
@@ -58,7 +53,6 @@ const SetLocation = () => {
     setMarker(newMarker);
     setMarkerLocation(location);
   };
-
   const handleSearch = () => {
     const geocoder = new window.google.maps.Geocoder();
     geocoder.geocode({ address: searchInput }, (results, status) => {
@@ -68,8 +62,7 @@ const SetLocation = () => {
         placeMarker(location); // Place a marker on the searched location
       } else {
         window.alert(
-          "Geocode was not successful for the following reason: ",
-          status
+          "Geocode was not successful for the following reason: " + status
         );
       }
     });
@@ -78,20 +71,19 @@ const SetLocation = () => {
   const setLocation = async () => {
     try {
       if (markerLocation) {
-        await api.post('/locations/add_location',
-          {
-            location_name: name,
-            latitude: markerLocation.lat(),
-            longitude: markerLocation.lng(),
-            radius: radius
-          }
-        )
-        window.alert('Location added successfully')
+        await api.post('/locations/add_location', {
+          location_name: name,
+          latitude: markerLocation.lat(),
+          longitude: markerLocation.lng(),
+          radius: radius
+        });
+        window.alert('Location added successfully');
       }
     } catch (error) {
-      window.alert('Error adding location')
+      window.alert('Error adding location');
     }
-  }
+  };
+
   return (
     <div className="home-container">
       <Sidebar />
@@ -143,7 +135,12 @@ const SetLocation = () => {
           }}
         ></div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button type="button" onClick={setLocation} className="btn btn-info" disabled={!isSetButtonEnabled}>
+          <button
+            type="button"
+            onClick={setLocation}
+            className="btn btn-info"
+            disabled={!isSetButtonEnabled}
+          >
             Set
           </button>
         </div>
