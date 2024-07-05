@@ -29,7 +29,7 @@ const Login = () => {
       // Add your login logic here
       try {
         let res = await axios.post("http://127.0.0.1:5000/api/users/login", {
-          email: userCreds.userName,
+          identifier: userCreds.userName,
           password: userCreds.password,
         });
         if (res.data.token) {
