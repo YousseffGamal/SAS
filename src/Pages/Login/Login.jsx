@@ -6,12 +6,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+
 const Login = () => {
   const [validated, setValidated] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false); // State for Remember Me
   const [userCreds, setUserCreds] = useState({
     userName: "",
     password: "",
   });
+
+  useEffect(() => {
+    // Add the login-body class to the body element when this component mounts
+    document.body.classList.add("login-body");
+
+    // Check for stored credentials
+    const savedCreds = JSON.parse(localStorage.getItem("userCreds"));
+    if (savedCreds) {
+      setUserCreds(savedCreds);
+      setRememberMe(true);
+    }
+
+    // Remove the login-body class when this component unmounts
+    return () => {
+      document.body.classList.remove("login-body");
+    };
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCreds((prevState) => ({
@@ -19,6 +39,11 @@ const Login = () => {
       [name]: value,
     }));
   };
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -33,15 +58,19 @@ const Login = () => {
           password: userCreds.password,
         });
         if (res.data.token) {
-          localStorage.setItem("accessToken", res.data.token)
-          const role = jwtDecode(localStorage.getItem("accessToken")).role;
+          if (rememberMe) {
+            localStorage.setItem("userCreds", JSON.stringify(userCreds));
+          } else {
+            sessionStorage.setItem("accessToken", res.data.token);
+          }
+
+          const role = jwtDecode(res.data.token).role;
           if (role === 'admin') {
             window.location.href = "/AddEmployee";
-          }else {
-            window.alert('Unauthorized')
+          } else {
+            window.alert('Unauthorized');
           }
-          
-        } 
+        }
       } catch (error) {
         if (error.response && error.response.status === 401) {
           alert("Invalid credentials, please try again.");
@@ -49,20 +78,9 @@ const Login = () => {
           alert("An error occurred, please try again later.");
         }
       }
-      
-
     }
     setValidated(true);
   };
-  useEffect(() => {
-    // Add the login-body class to the body element when this component mounts
-    document.body.classList.add("login-body");
-
-    // Remove the login-body class when this component unmounts
-    return () => {
-      document.body.classList.remove("login-body");
-    };
-  }, []);
 
   return (
     <Container className="login-container">
@@ -96,15 +114,16 @@ const Login = () => {
             placeholder="Enter your email"
             data-wow-delay="0.4s"
             onChange={handleChange}
+            value={userCreds.userName}
             required
-            style={{color:"white"}}
+            style={{ color: "white" }}
           />
           <Form.Control.Feedback type="invalid">
-            please enter your email
+            Please enter your email
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword" style={{ marginTop: "60px",color:"white" }}>
+        <Form.Group controlId="formBasicPassword" style={{ marginTop: "60px", color: "white" }}>
           <Form.Label
             className="form-label-left wow animate__animated animate__fadeInLeft"
             data-wow-delay="0.6s"
@@ -119,11 +138,22 @@ const Login = () => {
             data-wow-delay="0.6s"
             name="password"
             onChange={handleChange}
-            style={{color:"white"}}
+            value={userCreds.password}
+            style={{ color: "white" }}
           />
           <Form.Control.Feedback type="invalid">
-            please enter your password
+            Please enter your password
           </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicCheckbox" style={{ marginTop: "20px", color: "white" }}>
+          <Form.Check
+            type="checkbox"
+            label="Remember Me"
+            checked={rememberMe}
+            onChange={handleRememberMeChange}
+            style={{ color: "white" }}
+          />
         </Form.Group>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
