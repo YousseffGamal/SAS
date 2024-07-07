@@ -53,7 +53,7 @@ const Login = () => {
       e.preventDefault();
       // Add your login logic here
       try {
-        let res = await axios.post("http://127.0.0.1:5000/api/users/login", {
+        let res = await axios.post("https://api.sastechnique.com/api/users/login", {
           identifier: userCreds.userName,
           password: userCreds.password,
         });
