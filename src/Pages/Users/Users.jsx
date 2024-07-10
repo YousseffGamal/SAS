@@ -20,6 +20,10 @@ const UsersRecords = () => {
   }, []);
 
   const handleDeleteUser = async (userId) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this user?");
+    if (!isConfirmed) {
+      return;
+    }
     try {
       await api.delete(`/users/delete_user/${userId}`);
       // Update users state after deletion
