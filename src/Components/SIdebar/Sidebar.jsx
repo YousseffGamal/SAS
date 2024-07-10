@@ -116,6 +116,23 @@ const Sidebar = () => {
               <FaMapMarkerAlt style={{ marginRight: "10px" }} /> Set Location
             </li>
           </Link>
+          <Link
+            className="tex"
+            to="/view-locations"
+            style={{
+              backgroundColor: "#275959",
+              width: "188px",
+              height: "51px",
+              borderRadius: "12px",
+              marginTop: "30px",
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            <li>
+              <FaMapMarkerAlt style={{ marginRight: "10px" }} /> View Locations
+            </li>
+          </Link>
         </ul>
       </nav>
     </div>

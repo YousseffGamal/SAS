@@ -6,6 +6,7 @@ import EmployeesRecords from "./Pages/Employees Records/Employees Records";
 import Login from "./Pages/Login/Login";
 import SetLocation from "./Pages/Set Location/Set Location"
 import UsersRecords from "./Pages/Users/Users";
+import Locations from "./Pages/View Locations/View";
 // 
 const ProjectRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const ProjectRoutes = () => {
           <Route path="/EmployeesRecords" element={<EmployeesRecords />} />
           <Route path="/SetLocation" element={<SetLocation />} />
           <Route path="/users" element={<UsersRecords />} />
+          <Route path="/view-locations" element={<Locations />} />
 
 
 
