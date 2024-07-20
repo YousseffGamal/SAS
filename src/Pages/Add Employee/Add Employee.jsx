@@ -109,7 +109,7 @@ const AddEmployee = () => {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button type="submit" class="btn btn-info" onClick={handleSubmit}>
+          <button type="submit" className="btn btn-info" onClick={handleSubmit}>
             Add
           </button>
         </div>

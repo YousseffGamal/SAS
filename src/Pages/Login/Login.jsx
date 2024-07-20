@@ -60,8 +60,9 @@ const Login = () => {
         if (res.data.token) {
           if (rememberMe) {
             localStorage.setItem("userCreds", JSON.stringify(userCreds));
+            localStorage.setItem("accessToken", res.data.token);
           } else {
-            sessionStorage.setItem("accessToken", res.data.token);
+            localStorage.setItem("accessToken", res.data.token);
           }
 
           const role = jwtDecode(res.data.token).role;

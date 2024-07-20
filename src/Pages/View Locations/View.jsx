@@ -56,7 +56,7 @@ const Locations = () => {
               </tr>
             </thead>
             <tbody>
-              {records.map((record) => (
+              {records?.map((record) => (
                 <tr key={record.id}>
                   <td>{record.location_name}</td>
                   <td>{record.radius }</td>

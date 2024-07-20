@@ -50,7 +50,7 @@ const UsersRecords = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {users?.map((user) => (
                 <tr key={user._id}>
                   <td>{user.username}</td>
                   <td>{user.email}</td>

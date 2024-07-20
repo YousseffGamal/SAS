@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../Components/SIdebar/Sidebar"; // Adjust path as necessary
 import "./Set Location.css"; // Ensure correct CSS file path
-import { FaMapMarkerAlt } from "react-icons/fa"; // Import required icons from react-icons/fa
 import api from "../../axios";
 
 const SetLocation = () => {
@@ -10,56 +9,84 @@ const SetLocation = () => {
   const [name, setName] = useState("");
   const [marker, setMarker] = useState(null); // State to hold the marker object
   const [markerLocation, setMarkerLocation] = useState(null);
-  const [radius, setRadius] = useState();
+  const [radius, setRadius] = useState("");
   const [isSetButtonEnabled, setIsSetButtonEnabled] = useState(false);
 
   useEffect(() => {
-    function initMap() {
+    const initMap = () => {
       const mapContainer = document.getElementById("map-container");
+      if (!mapContainer) {
+        console.error("Map container not found");
+        return;
+      }
+
       const mapOptions = {
         zoom: 13,
-        center: { lat: 24.596080, lng: 46.705032 }, // Adjust center coordinates if needed
+        center: { lat: 24.59608, lng: 46.705032 }, // Adjust center coordinates if needed
       };
-      const newMap = new window.google.maps.Map(mapContainer, mapOptions); // Ensure window.google is used
-      setMap(newMap);
-    }
 
-    if (window.google && window.google.maps) {
-      initMap();
-    }
+      try {
+        const newMap = new window.google.maps.Map(mapContainer, mapOptions);
+        setMap(newMap);
+
+        // Add a click listener to the map to place a marker
+        newMap.addListener("click", (event) => {
+          console.log("Map clicked at: ", event.latLng.toString());
+          placeMarker(event.latLng);
+        });
+      } catch (error) {
+        console.error("Error initializing map: ", error);
+      }
+    };
+
+    // Listen for the event triggered by the Google Maps API callback
+    window.addEventListener('mapsLoaded', initMap);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('mapsLoaded', initMap);
+    };
   }, []);
 
   useEffect(() => {
-    if (name && radius) {
+    if (name && radius && markerLocation) {
       setIsSetButtonEnabled(true);
     } else {
       setIsSetButtonEnabled(false);
     }
-  }, [name, radius]);
+  }, [name, radius, markerLocation]);
 
   const placeMarker = (location) => {
-    // If a marker already exists, remove it
-    if (marker) {
-      marker.setMap(null);
+    try {
+      // If a marker already exists, remove it
+      if (marker) {
+        marker.setMap(null);
+      }
+
+      // Create a new marker
+      const newMarker = new window.google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Selected Location",
+        animation: window.google.maps.Animation.DROP,
+      });
+
+      console.log("Marker placed at: ", location.toString());
+
+      // Update marker state and location state
+      setMarker(newMarker);
+      setMarkerLocation(location);
+    } catch (error) {
+      console.error("Error placing marker: ", error);
     }
-
-    // Create a new marker
-    const newMarker = new window.google.maps.Marker({
-      position: location,
-      map: map,
-    });
-
-    // Update marker state and location state
-    setMarker(newMarker);
-    setMarkerLocation(location);
   };
+
   const handleSearch = () => {
     const geocoder = new window.google.maps.Geocoder();
     geocoder.geocode({ address: searchInput }, (results, status) => {
       if (status === window.google.maps.GeocoderStatus.OK && results[0]) {
         const location = results[0].geometry.location;
-        map.setCenter(location);
-        placeMarker(location); // Place a marker on the searched location
+        map.setCenter(location); // Center the map on the searched location
       } else {
         window.alert(
           "Geocode was not successful for the following reason: " + status
