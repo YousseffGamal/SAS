@@ -67,7 +67,7 @@ const Login = () => {
 
           const role = jwtDecode(res.data.token).role;
           if (role === 'admin') {
-            window.location.href = "/AddEmployee";
+            window.location.href = "/add-employee";
           } else {
             window.alert('Unauthorized');
           }

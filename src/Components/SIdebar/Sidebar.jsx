@@ -50,7 +50,7 @@ const Sidebar = () => {
         >
           <Link
             className="tex"
-            to="/EmployeesRecords"
+            to="/employees-records"
             style={{
               backgroundColor: "#275959",
               width: "188px",
@@ -84,7 +84,7 @@ const Sidebar = () => {
           </Link>
           <Link
             className="tex"
-            to="/AddEmployee"
+            to="/add-employee"
             style={{
               backgroundColor: "#275959",
               width: "188px",
@@ -101,7 +101,7 @@ const Sidebar = () => {
           </Link>
           <Link
             className="tex"
-            to="/SetLocation"
+            to="/set-location"
             style={{
               backgroundColor: "#275959",
               width: "188px",
