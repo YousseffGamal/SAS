@@ -127,6 +127,7 @@ const Sidebar = () => {
               marginTop: "30px",
               textDecoration: "none",
               color: "white",
+              marginBottom:"50px"
             }}
           >
             <li>

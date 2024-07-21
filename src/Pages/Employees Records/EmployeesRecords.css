@@ -2,14 +2,14 @@
 .home-container {
     display: flex;
   }
-  body{
+  /* body{
     background-image: url("../../Images/Group\ 2\ \(1\).png");
     background-position: center ;
-    background-size: 50%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-color: #f1f4f3;
     
-      }
+      } */
   @font-face {
     font-family: Baloo-Medium;
     src: url(../../assets/Fonts/Baloo/BalooBhaina2-Medium.ttf);
