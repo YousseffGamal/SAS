@@ -143,6 +143,9 @@ const SetLocation = () => {
             marginTop: "20px",
           }}
         ></div>
+        <div style={{textAlign:'center'}}>
+          {markerLocation ? 'Coordinates: ' + markerLocation : null}
+          </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button type="button" onClick={setLocation} className="btn btn-info" disabled={!isSetButtonEnabled}>
             Set
