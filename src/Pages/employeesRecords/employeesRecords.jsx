@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import * as XLSX from "xlsx";
+import ReactPaginate from 'react-paginate';
 
 const monthOptions = [
   { value: 0, label: "January" },
@@ -37,6 +38,8 @@ const EmployeesRecords = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedMonths, setSelectedMonths] = useState([]);
   const [employeeName, setEmployeeName] = useState(""); // New state for employee name filter
+  const [currentPage, setCurrentPage] = useState(0);
+  const recordsPerPage = 10;
 
   useEffect(() => {
     const fetchRecords = async () => {
@@ -134,6 +137,15 @@ const EmployeesRecords = () => {
     XLSX.writeFile(workbook, "employees_records.xlsx");
   };
 
+  const handlePageChange = (data) => {
+    setCurrentPage(data.selected);
+  };
+
+  const paginatedRecords = filteredRecords.slice(
+    currentPage * recordsPerPage,
+    (currentPage + 1) * recordsPerPage
+  );
+
   return (
     <div className="home-container">
       <Sidebar />
@@ -184,7 +196,7 @@ const EmployeesRecords = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredRecords?.map((record) => (
+              {paginatedRecords?.map((record) => (
                 <tr key={record.check_out_time}>
                   <td style={{ textAlign: "center" }}>
                     <input
@@ -208,6 +220,27 @@ const EmployeesRecords = () => {
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="6">
+                  <div className="pagination-container">
+                    <ReactPaginate
+                      previousLabel={"previous"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      breakClassName={"break-me"}
+                      pageCount={Math.ceil(filteredRecords?.length / recordsPerPage)}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageChange}
+                      containerClassName={"pagination"}
+                      subContainerClassName={"pages pagination"}
+                      activeClassName={"active"}
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
