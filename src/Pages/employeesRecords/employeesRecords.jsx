@@ -44,6 +44,7 @@ const EmployeesRecords = () => {
         const res = await api.get("/attendance/get_attendance");
         setRecords(res.data);
         setFilteredRecords(res.data); // Initially display all records
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -124,7 +125,7 @@ const EmployeesRecords = () => {
         Day: new Date(record.check_in_time).getUTCDate(),
         From: new Date(record.check_in_time).toLocaleTimeString(),
         To: new Date(record.check_out_time).toLocaleTimeString(),
-        'Location name': record.location_name
+        'Location name': record.location.name
       }))
     );
   
@@ -198,7 +199,7 @@ const EmployeesRecords = () => {
                     {new Date(record.check_in_time).toLocaleTimeString()} -{" "}
                     {new Date(record.check_out_time).toLocaleTimeString()}
                   </td>
-                  <td>{record.location_name}</td>
+                  <td>{record.location.name}</td>
                   <td>
                     <Link to={`/employee-details/${record.employee_id}`}>
                       <img src={arrow} alt="Details" />
